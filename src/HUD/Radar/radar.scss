@@ -1,10 +1,11 @@
 #radar_maps_container {
 	position: fixed;
-	top: 10px;
-	left: 10px;
+	top: 20px;
+	left: 20px;
 	border: none;
 	background-color: rgba(0,0,0,0.5);
 	transition: all 1s;
+
 	.map-container {
 		transition: all 1s;
 	}
@@ -26,7 +27,7 @@
 }
 .radar-component-container {
 	width: 350px;
-	height:350px;
+	height: 350px;
 	overflow: hidden;
 }
 #maps_container {

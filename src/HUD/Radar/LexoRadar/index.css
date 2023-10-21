@@ -184,7 +184,7 @@ html, body, .map-container {
     position: absolute;
     width: 2px;
     height: 2px;
-    border-radius: 0.08px;
+    border-radius: 50%;
 }
 .map .grenade.flashbang.exploded .explode-point, .map .grenade.frag.exploded .explode-point {
     animation: FlashOrFragDeployed 0.25s 1 forwards;
@@ -238,7 +238,7 @@ html, body, .map-container {
     border-radius: 50%;
     transition: background-color 0.5s;
     -webkit-font-smoothing: crisp-edges;
-    font-size: 37px;
+    font-size: 50px;
     text-shadow: 4px 4px 0 black;
 }
 .map .bomb {
@@ -261,10 +261,10 @@ html, body, .map-container {
     animation: BombDefused 2s 1 forwards;
 }
 .map .player.CT .label {
-    background: rgb(16, 88, 197)
+    background: var(--color-new-ct);
 }
 .map .player.T .label {
-    background: rgb(255, 153, 0);
+    background: var(--color-new-t);
 }
 .map .player.T.hasBomb .label {
     background: red;

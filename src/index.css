@@ -9,10 +9,10 @@ body,
 
 body {
   margin: 0;
-  font-family: 'Stratum2', 'Montserrat', 'Roboto', sans-serif;
+  font-family: 'Exo 2'; 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /*background-image: url('./assets/bg.png');/**/
+  /*background-image: url('./assets/bg.png');*/
 }
 
 @font-face {
@@ -34,6 +34,7 @@ code {
   width: 100%;
   height: 100%;
   perspective: 500px;
+  overflow: hidden;
 }
 
 :root {
@@ -45,10 +46,10 @@ code {
   --color-gray: rgba(191, 191, 191, 1.0);
   --color-moneys: #a7d32e;
   --dev-purple: rgba(200, 0, 255, 1);
-  --color-t: #c19511;
-  --color-ct: #5788a8;
-  --color-new-t: #f0c941;
-  --color-new-ct: #5ab8f4;
+  --color-t: #ffa000;
+  --color-ct: #03a9f4;
+  --color-new-t: #ffa000;
+  --color-new-ct: #03a9f4;
   --color-bomb: #f22222;
   --color-defuse: #2222f2;
 }
