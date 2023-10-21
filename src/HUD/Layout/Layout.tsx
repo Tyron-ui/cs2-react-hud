@@ -27,7 +27,8 @@ interface Props {
 interface State {
   winner: Team | null,
   showWin: boolean,
-  forceHide: boolean
+  forceHide: boolean,
+  forceShowUtilityLevel: boolean,
 }
 
 export default class Layout extends React.Component<Props, State> {
@@ -36,7 +37,8 @@ export default class Layout extends React.Component<Props, State> {
     this.state = {
       winner: null,
       showWin: false,
-      forceHide: false
+      forceHide: false,
+      forceShowUtilityLevel: false
     }
   }
 
@@ -46,6 +48,13 @@ export default class Layout extends React.Component<Props, State> {
         setTimeout(() => {
           this.setState({ showWin: false })
         }, 4000)
+      });
+    });
+    GSI.on('bombPlant', player => {
+      this.setState({ forceShowUtilityLevel: true }, () => {
+        setTimeout(() => {
+          this.setState({ forceShowUtilityLevel: false })
+        }, 7000)
       });
     });
     actions.on("boxesState", (state: string) => {
@@ -106,7 +115,7 @@ export default class Layout extends React.Component<Props, State> {
 
         <MapSeries teams={[left, right]} match={match} isFreezetime={isFreezetime} map={game.map} />
         <div className={"boxes left"}>
-          <UtilityLevel side={left.side} players={game.players} show={isFreezetime && !forceHide} />
+          <UtilityLevel side={left.side} players={game.players} show={(isFreezetime && !forceHide) || this.state.forceShowUtilityLevel} />
           <SideBox side="left" hide={forceHide} />
           <MoneyBox
             team={left.side}
@@ -118,7 +127,7 @@ export default class Layout extends React.Component<Props, State> {
           />
         </div>
         <div className={"boxes right"}>
-          <UtilityLevel side={right.side} players={game.players} show={isFreezetime && !forceHide} />
+          <UtilityLevel side={right.side} players={game.players} show={(isFreezetime && !forceHide) || this.state.forceShowUtilityLevel} />
           <SideBox side="right" hide={forceHide} />
           <MoneyBox
             team={right.side}
