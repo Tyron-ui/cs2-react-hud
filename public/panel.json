@@ -101,6 +101,20 @@
                         "label": "Toggle radar view"
                     }
                 ]
+            },
+            {
+                "type": "action",
+                "name": "tboxesState",
+                "values": [
+                    {
+                        "name": "show",
+                        "label": "Show teamboxes"
+                    },
+                    {
+                        "name": "hide",
+                        "label": "Hide teamboxes"
+                    }
+                ]
             }
         ]
     },

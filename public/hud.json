@@ -1,7 +1,7 @@
 {
-    "name":"Lexogrine CS2 HUD",
+    "name":"Tyron CS2 HUD",
     "version":"1.0.0",
-    "author":"Lexogrine",
+    "author":"Tyron",
     "legacy": false,
     "radar": true,
     "killfeed": false,

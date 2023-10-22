@@ -3,7 +3,7 @@ import TeamBox from "./../Players/TeamBox";
 import MatchBar from "../MatchBar/MatchBar";
 import SeriesBox from "../MatchBar/SeriesBox";
 import Observed from "./../Players/Observed";
-import { CSGO, Team } from "csgogsi-socket";
+import { CSGO, Team, RoundInfo } from "csgogsi-socket";
 import { Match } from "../../api/interfaces";
 import RadarMaps from "./../Radar/RadarMaps";
 import Trivia from "../Trivia/Trivia";
@@ -29,8 +29,27 @@ interface State {
   showWin: boolean,
   forceHide: boolean,
   forceShowUtilityLevel: boolean,
+  tboxes: boolean,
 }
 
+const getRound = (round: number | undefined) => {
+  switch (round) {
+    case 5:
+      return round;
+    case 10:
+      return round;
+    case 15:
+      return round;
+    case 20:
+      return round;
+    case 25:
+      return round;
+    case 30:
+      return round;
+    default:
+      return;
+  }
+};
 export default class Layout extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -38,7 +57,8 @@ export default class Layout extends React.Component<Props, State> {
       winner: null,
       showWin: false,
       forceHide: false,
-      forceShowUtilityLevel: false
+      forceShowUtilityLevel: false,
+      tboxes: false,
     }
   }
 
@@ -54,7 +74,7 @@ export default class Layout extends React.Component<Props, State> {
       this.setState({ forceShowUtilityLevel: true }, () => {
         setTimeout(() => {
           this.setState({ forceShowUtilityLevel: false })
-        }, 7000)
+        }, 5000)
       });
     });
     actions.on("boxesState", (state: string) => {
@@ -62,6 +82,13 @@ export default class Layout extends React.Component<Props, State> {
         this.setState({ forceHide: false });
       } else if (state === "hide") {
         this.setState({ forceHide: true });
+      }
+    });
+    actions.on("tboxesState", (state: string) => {
+      if (state === "show") {
+        this.setState({ tboxes: false });
+      } else if (state === "hide") {
+        this.setState({ tboxes: true });
       }
     });
   }
@@ -85,6 +112,15 @@ export default class Layout extends React.Component<Props, State> {
     const rightPlayers = game.players.filter(player => player.team.side === right.side);
     const isFreezetime = (game.round && game.round.phase === "freezetime") || game.phase_countdowns.phase === "freezetime";
     const { forceHide } = this.state;
+    const { tboxes } = this.state;
+    const roundsArr: Partial<RoundInfo>[] = [];
+    game.map.rounds.forEach((round) => roundsArr.push(round));
+
+    for (let i = roundsArr.length + 1; i < 31; i++) {
+      roundsArr.push({
+        round: i,
+      });
+    }
 
     return (
       <div className="layout">
@@ -99,7 +135,7 @@ export default class Layout extends React.Component<Props, State> {
         <Killfeed />
         <Overview match={match} map={game.map} players={game.players || []} />
         <RadarMaps match={match} map={game.map} game={game} />
-        <MatchBar map={game.map} phase={game.phase_countdowns} bomb={game.bomb} match={match} />
+        <MatchBar map={game.map} phase={game.phase_countdowns} bomb={game.bomb} match={match} isFreezeTime={isFreezetime} />
         <Pause  phase={game.phase_countdowns}/>
         <Timeout map={game.map} phase={game.phase_countdowns} />
         <SeriesBox map={game.map} phase={game.phase_countdowns} match={match} />
@@ -108,8 +144,8 @@ export default class Layout extends React.Component<Props, State> {
 
         <Observed player={game.player} veto={this.getVeto()} round={game.map.round+1}/>
 
-        <TeamBox team={left} players={leftPlayers} side="left" current={game.player} />
-        <TeamBox team={right} players={rightPlayers} side="right" current={game.player} />
+        <TeamBox team={left} players={leftPlayers} side="left" current={game.player} hide={tboxes} />
+        <TeamBox team={right} players={rightPlayers} side="right" current={game.player} hide={tboxes}/>
 
         <Trivia />
 

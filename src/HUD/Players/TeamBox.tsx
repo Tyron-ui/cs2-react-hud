@@ -8,12 +8,13 @@ interface Props {
   team: I.Team,
   side: 'right' | 'left',
   current: I.Player | null,
+  hide: boolean,
 }
 
 export default class TeamBox extends React.Component<Props> {
   render() {
     return (
-      <div className={`teambox ${this.props.team.side} ${this.props.side}`}>
+        <div className={`teambox ${this.props.team.side} ${this.props.side} ${this.props.hide ? 'hide' : ''}`}>
         {this.props.players.map(player => <Player
           key={player.steamid}
           player={player}

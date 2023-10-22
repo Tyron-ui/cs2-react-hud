@@ -1,12 +1,12 @@
 .boxes {
 	position: fixed;
-	bottom: 425px;
+	bottom: 480px;
 }
 .boxes.left {
-	left: 20px;
+	left: 25px;
 }
 .boxes.right {
-	right: 20px;
+	right: 25px;
 }
 .boxes.hide {
 	.utilitybox {
@@ -35,8 +35,8 @@
 	opacity: 0;
 }
 .sidebox {
-	width: 415px;
-	height: 70px;
+	width: 375px;
+	height: 85px;
 	display: none;
 	flex-direction: row;
 	opacity: 1;
@@ -72,8 +72,8 @@
 	}
 }
 .utilitybox {
-	width: 415px;
-	height: 75px;
+	width: 375px;
+	height: 85px;
 	display: flex;
 	flex-direction: row;
 	opacity: 1;
@@ -120,8 +120,8 @@
 	}
 }
 .moneybox {
-	width: 415px;
-	height: 75px;
+	width: 375px;
+	height: 85px;
 	display: flex;
 	flex-direction: row;
 	opacity: 1;
@@ -140,7 +140,7 @@
 			height: 25px;
 			display: flex;
 			align-items: flex-end;
-			font-size: 16px;
+			font-size: 15px;
 			justify-content: center;
 		}
 		.value {
