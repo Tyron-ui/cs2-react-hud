@@ -4,20 +4,22 @@ import MatchBar from "../MatchBar/MatchBar";
 import SeriesBox from "../MatchBar/SeriesBox";
 import Observed from "./../Players/Observed";
 import { CSGO, Team, RoundInfo } from "csgogsi-socket";
-import { Match } from "../../api/interfaces";
+import { Match, Player } from "../../api/interfaces";
 import RadarMaps from "./../Radar/RadarMaps";
-import Trivia from "../Trivia/Trivia";
 import SideBox from '../SideBoxes/SideBox';
 import { GSI, actions } from "./../../App";
 import MoneyBox from '../SideBoxes/Money';
 import UtilityLevel from '../SideBoxes/UtilityLevel';
 import Killfeed from "../Killfeed/Killfeed";
 import MapSeries from "../MapSeries/MapSeries";
-import Overview from "../Overview/Overview";
 import Tournament from "../Tournament/Tournament";
 import Pause from "../PauseTimeout/Pause";
 import Timeout from "../PauseTimeout/Timeout";
 import PlayerCamera from "../Camera/Camera";
+import * as I from 'csgogsi-socket';
+import { ReactComponent as DeathIcon } from "../../assets/bcl/death_icon.svg";
+import { ReactComponent as DefuseIcon } from "../../assets/images/icon_defuse_default.svg";
+import { ReactComponent as BombIcon } from "../../assets/weapons/c4.svg";
 
 interface Props {
   game: CSGO,
@@ -30,21 +32,22 @@ interface State {
   forceHide: boolean,
   forceShowUtilityLevel: boolean,
   tboxes: boolean,
+  mvpPlayer: I.Player | null,
 }
 
 const getRound = (round: number | undefined) => {
   switch (round) {
-    case 5:
+    case 4:
       return round;
-    case 10:
+    case 8:
       return round;
-    case 15:
+    case 12:
+      return round;
+    case 16:
       return round;
     case 20:
       return round;
-    case 25:
-      return round;
-    case 30:
+    case 24:
       return round;
     default:
       return;
@@ -57,6 +60,7 @@ export default class Layout extends React.Component<Props, State> {
       winner: null,
       showWin: false,
       forceHide: false,
+      mvpPlayer: null,
       forceShowUtilityLevel: false,
       tboxes: false,
     }
@@ -97,11 +101,11 @@ export default class Layout extends React.Component<Props, State> {
     const { game, match } = this.props;
     const { map } = game;
     if (!match) return null;
-    const mapName = map.name.substring(map.name.lastIndexOf('/') + 1);
-    const veto = match.vetos.find(veto => veto.mapName === mapName);
+    const mapName = map.name.substring(map.name.lastIndexOf("/") + 1);
+    const veto = match.vetos.find((veto) => veto.mapName === mapName);
     if (!veto) return null;
     return veto;
-  }
+  };
 
   render() {
     const { game, match } = this.props;
@@ -116,14 +120,14 @@ export default class Layout extends React.Component<Props, State> {
     const roundsArr: Partial<RoundInfo>[] = [];
     game.map.rounds.forEach((round) => roundsArr.push(round));
 
-    for (let i = roundsArr.length + 1; i < 31; i++) {
+    for (let i = roundsArr.length + 1; i < 24; i++) {
       roundsArr.push({
         round: i,
       });
     }
 
     return (
-      <div className="layout">
+      <div className={`layout ${isFreezetime ? "freeze" : ""}`}>
         <div className={`players_alive`}>
           <div className="title_container">Players alive</div>
           <div className="counter_container">
@@ -133,22 +137,46 @@ export default class Layout extends React.Component<Props, State> {
           </div>
         </div>
         <Killfeed />
-        <Overview match={match} map={game.map} players={game.players || []} />
-        <RadarMaps match={match} map={game.map} game={game} />
+        <RadarMaps
+          veto={this.getVeto()}
+          match={match}
+          map={game.map}
+          game={game}
+        />
         <MatchBar map={game.map} phase={game.phase_countdowns} bomb={game.bomb} match={match} isFreezeTime={isFreezetime} />
+        <div className={`rounds-result ${!isFreezetime || this.state.mvpPlayer ? "hide" : ""}`}>
+          {roundsArr.map((round) => (
+            <div key={round.round} className="round">
+              {round.outcome && (
+                <div className="icon">
+                  {round.outcome === "ct_win_elimination" ||
+                  round.outcome === "t_win_elimination" ? (
+                    <DeathIcon />
+                  ) : round.outcome === "ct_win_defuse" ? (
+                    <DefuseIcon />
+                  ) : (
+                    <BombIcon />
+                  )}
+                </div>
+              )}
+              <div
+                className={`block ${
+                  round.side === "CT" ? "CT" : round.side === "T" ? "T" : ""
+                }`}
+              >
+                <div className="block-top" />
+                <span>{getRound(round.round)}</span>
+              </div>
+            </div>
+          ))}
+        </div>
         <Pause  phase={game.phase_countdowns}/>
         <Timeout map={game.map} phase={game.phase_countdowns} />
         <SeriesBox map={game.map} phase={game.phase_countdowns} match={match} />
-
         <Tournament />
-
         <Observed player={game.player} veto={this.getVeto()} round={game.map.round+1}/>
-
         <TeamBox team={left} players={leftPlayers} side="left" current={game.player} hide={tboxes} />
         <TeamBox team={right} players={rightPlayers} side="right" current={game.player} hide={tboxes}/>
-
-        <Trivia />
-
         <MapSeries teams={[left, right]} match={match} isFreezetime={isFreezetime} map={game.map} />
         <div className={"boxes left"}>
           <UtilityLevel side={left.side} players={game.players} show={(isFreezetime && !forceHide) || this.state.forceShowUtilityLevel} />

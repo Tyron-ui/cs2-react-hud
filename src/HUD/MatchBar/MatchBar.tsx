@@ -6,6 +6,7 @@ import Bomb from "./../Timers/BombTimer";
 import Countdown from "./../Timers/Countdown";
 import { GSI } from "../../App";
 import { Match } from "../../api/interfaces";
+import { Defuse } from "../../assets/Icons";
 
 function stringToClock(time: string | number, pad = true) {
     if (typeof time === "string") {
@@ -189,21 +190,53 @@ export default class TeamBox extends React.Component<IProps, IState> {
             <>
                 <div id={`matchbar`}>
                     <TeamScore team={left} orientation={"left"} timer={leftTimer} showWin={winState.show && winState.side === "left"} />
-                    <div className={`score left ${left.side}`}>{left.score}</div>
+                    <div className={`score left ${left.side}`}>
+                      <span>{left.score}</span>
+                        <div
+                            className={`defuse-bar ${
+                               !isPlanted || bomb?.state !== "defusing" ? "hide" : ""
+                            }`}
+                        >
+                            <Defuse />
+                            <div className="indicator">
+                                <div
+                                    className="stripe"
+                                    style={{ width: `${100 - defusing.width}%` }}
+                                />
+                            </div>
+                        </div>
+                        <Bomb isPlanted={isPlanted} bomb={bomb} />
+                    </div>
+
                     <div id="timer" className={bo === 0 ? 'no-bo' : ''}>
                         <div className={`round_timer_text ${isPlanted ? "planting" : ""}`}>
                             {isPlanted ? (
                                 <span>
-                                    BOMB ON {bomb?.site}
+                                    BOMB PLANTED <br /> ON {bomb?.site}
                                 </span>
                             ) : (
                                 time
                             )}
                         </div>
                         <div id="round_now" className={isPlanted ? "hide" : ""}>{this.getRoundLabel()}</div>
-                        <Bomb />
                     </div>
-                    <div className={`score right ${right.side}`}>{right.score}</div>
+                    <div className={`score right ${right.side}`}>
+                        <span>{right.score}</span>
+                        <div
+                            className={`defuse-bar ${
+                              !isPlanted || bomb?.state !== "defusing" ? "hide" : ""
+                            }`}
+                        >
+                           <Defuse />
+                           <div className="indicator">
+                               <div
+                                   className="stripe"
+                                   style={{ width: `${100 - defusing.countdown}%` }}
+                               />
+                           </div>
+                        </div>
+                        <Bomb isPlanted={isPlanted} bomb={bomb} />
+                    </div>
                     <TeamScore team={right} orientation={"right"} timer={rightTimer} showWin={winState.show && winState.side === "right"} />
                 </div>
             </>

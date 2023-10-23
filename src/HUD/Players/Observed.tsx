@@ -63,13 +63,6 @@ export default class Observed extends React.Component<{ player: Player | null, v
 						<div className="username">{player.name}</div>
 						{player.state.round_kills ? <div className="roundkills-container">{player.state.round_kills}</div> : null}
 					</div>
-					<div className="grenade_container">
-						{grenades.map(grenade => <React.Fragment key={`${player.steamid}_${grenade.name}_${grenade.ammo_reserve || 1}`}>
-							<Weapon weapon={grenade.name} active={grenade.state === "active"} isGrenade />
-							{
-								grenade.ammo_reserve === 2 ? <Weapon weapon={grenade.name} active={grenade.state === "active"} isGrenade /> : null}
-						</React.Fragment>)}
-					</div>
 				</div>
 				<div className="stats_row">
 					<div className="health_armor_container">
@@ -89,6 +82,13 @@ export default class Observed extends React.Component<{ player: Player | null, v
 						<Statistic label={"ADR"} value={player.state.adr} />
 					</div>
 					<div className="ammo">
+						<div className="grenade_container">
+							{grenades.map(grenade => <React.Fragment key={`${player.steamid}_${grenade.name}_${grenade.ammo_reserve || 1}`}>
+								<Weapon weapon={grenade.name} active={grenade.state === "active"} isGrenade />
+								{
+									grenade.ammo_reserve === 2 ? <Weapon weapon={grenade.name} active={grenade.state === "active"} isGrenade /> : null}
+							</React.Fragment>)}
+						</div>
 						<div className="ammo_counter">
 							<div className="ammo_clip">{(currentWeapon && currentWeapon.ammo_clip) || "-"}</div>
 							<div className="ammo_reserve">/{(currentWeapon && currentWeapon.ammo_reserve) || "-"}</div>

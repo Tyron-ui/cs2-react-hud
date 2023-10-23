@@ -50,14 +50,14 @@
 
         .ammo {
             height: 100%;
-            width: 120px;
+            width: 170px;
             display: flex;
 
             .grenade_container {
                 height: 100%;
                 display: flex;
                 align-items: center;
-                width: 90px;
+                width: 50px;
                 justify-content: center;
             }
 
@@ -194,7 +194,7 @@
             position: absolute;
             width: 170px;
             height: 200px;
-            left: -170px;
+            left: -148px;
             bottom: 0px;
             overflow: hidden;
 
