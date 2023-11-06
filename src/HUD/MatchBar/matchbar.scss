@@ -50,7 +50,6 @@
 		.defuse-bar {
 			background-color: var(--sub-panel-color);
 			position: absolute;
-			left: 0px;
 			bottom: -40px;
 			width: 401px;
 			height: 40px;
@@ -62,7 +61,6 @@
 			.indicator {
 				display: flex;
 				width: 100%;
-				border-radius: 99px;
 				height: 15px;
 				background-color: rgba(255, 255, 255, 0.2);
 
@@ -96,20 +94,15 @@
 
 	.left {
 		.defuse-bar, .plant-bar {
-			display: flex;
-			flex-direction: row-reverse;
-			/*left: 0px;*/
-
-			.indicator {
-				display: flex;
-				flex-direction: row-reverse;
-			}
+			left: 0px;
+			flex-direction: row;
 		}
 	}
 
 	.right {
 		.defuse-bar, .plant-bar {
-			/*clip-path: polygon(6% 0, 100% 0, 100% 100%, 0% 100%);*/
+			right: 0px;
+			flex-direction: row-reverse;
 		}
 	}
 
@@ -128,7 +121,6 @@
 
 		&.left > .logo {
 			border-right: 4px solid var(--color-new-t);
-			//clip-path: polygon(10% 0, 100% 0, 100% 100%, 10% 100%, 0 90%, 0 10%);
 			background-color: var(--color-new-t);
 		}
 
@@ -144,7 +136,7 @@
 		.plant-bar {
 			background-color: var(--sub-panel-color);
 			position: absolute;
-			right: 0px;
+			/*right: 0px;*/
 			bottom: -40px;
 			width: 401px;
 			height: 40px;
@@ -155,7 +147,6 @@
 
 			.indicator {
 				width: 100%;
-				border-radius: 99px;
 				height: 15px;
 				background-color: rgba(255, 255, 255, 0.2);
 
@@ -368,10 +359,11 @@
 	align-items: center;
 	color: black;
 	justify-content: center;
-	background-color: var(--sub-panel-color);
+	background-color: rgb(29, 29, 29);
 	font-size: 25px;
 	// font-family: Montserrat;
 	font-weight: 600;
+	z-index: 2;
 
 	&.show {
 		display: flex;

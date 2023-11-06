@@ -47,12 +47,12 @@ html, body, .map-container {
     height: 1024px;
     position: relative;
     transform: scale(1);
-    transition: all 0.5s;
+    transition: all 0.3s;
 }
 .map .player, .map .grenade, .map .bomb {
     position: absolute;
-    height:30px;
-    width:30px;
+    height:45px;
+    width:45px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -246,10 +246,10 @@ html, body, .map-container {
 }
 .map .bomb .background {
     background-image: url('./grenades/bomb.png');
-    background-size: 66%;
+    background-size: 90%;
     background-position: center;
     background-repeat: no-repeat;
-    border-radius:50%;
+    /*border-radius:50%;*/
 }
 .map .bomb.planted .explode-point, .map .bomb.defusing .explode-point {
     animation: BombPlanted 2s infinite;

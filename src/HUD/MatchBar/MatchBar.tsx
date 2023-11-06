@@ -231,7 +231,7 @@ export default class TeamBox extends React.Component<IProps, IState> {
                            <div className="indicator">
                                <div
                                    className="stripe"
-                                   style={{ width: `${100 - defusing.countdown}%` }}
+                                   style={{ width: `${100 - defusing.width}%` }}
                                />
                            </div>
                         </div>

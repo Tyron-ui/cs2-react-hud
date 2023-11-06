@@ -26,8 +26,8 @@ div.label.active {}
 
 /* The dropped or planted bomb on the map */
 #bomb {
-    height: 4vmin;
-    width: 4vmin;
+    height: 5vmin;
+    width: 5vmin;
     background-repeat:no-repeat;
 }
 

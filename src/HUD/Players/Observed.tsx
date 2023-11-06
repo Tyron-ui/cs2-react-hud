@@ -79,7 +79,7 @@ export default class Observed extends React.Component<{ player: Player | null, v
 						<Statistic label={"K"} value={stats.kills} />
 						<Statistic label={"A"} value={stats.assists} />
 						<Statistic label={"D"} value={stats.deaths} />
-						<Statistic label={"K/D"} value={ratio.toFixed(2)} />
+						{/*<Statistic label={"K/D"} value={ratio.toFixed(2)} />*/}
 					</div>
 					<div className="ammo">
 						<div className="grenade_container">

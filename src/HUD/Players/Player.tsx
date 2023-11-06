@@ -81,10 +81,10 @@ const Player = ({ player, isObserved }: IProps) => {
                 <Avatar teamId={player.team.id} steamid={player.steamid} height={57} width={57} showSkull={false} showCam={false} sidePlayer={false} />
                 <div className="dead-stats">
                     <div className="labels">
-                        <div className="stat-label">R.DMG</div>
+                        <div className="stat-label">ADR</div>
                     </div>
                     <div className="values">
-                        <div className="stat-value">{player.state.round_totaldmg}</div>
+                        <div className="stat-value">{player.state.adr}</div>
                     </div>
                 </div>
                 <div className="player_stats">

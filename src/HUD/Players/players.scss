@@ -16,18 +16,23 @@
 
 .teambox.right.CT .player:first-child .player_data {
     background-image: url("../../assets/CT_R1.png");
+    background-position: right;
 }
 .teambox.right.CT .player:nth-child(2) .player_data {
     background-image: url("../../assets/CT_R2.png");
+    background-position: right;
 }
 .teambox.right.CT .player:nth-child(3) .player_data {
     background-image: url("../../assets/CT_R3.png");
+    background-position: right;
 }
 .teambox.right.CT .player:nth-child(4) .player_data {
     background-image: url("../../assets/CT_R4.png");
+    background-position: right;
 }
 .teambox.right.CT .player:last-child .player_data {
     background-image: url("../../assets/CT_R5.png");
+    background-position: right;
 }
 
 .teambox.left.T .player:first-child .player_data {
@@ -48,18 +53,23 @@
 
 .teambox.right.T .player:first-child .player_data {
     background-image: url("../../assets/T_R1.png");
+    background-position: right;
 }
 .teambox.right.T .player:nth-child(2) .player_data {
     background-image: url("../../assets/T_R2.png");
+    background-position: right;
 }
 .teambox.right.T .player:nth-child(3) .player_data {
     background-image: url("../../assets/T_R3.png");
+    background-position: right;
 }
 .teambox.right.T .player:nth-child(4) .player_data {
     background-image: url("../../assets/T_R4.png");
+    background-position: right;
 }
 .teambox.right.T .player:last-child .player_data {
     background-image: url("../../assets/T_R5.png");
+    background-position: right;
 }
 
 .teambox.hide {
@@ -73,8 +83,7 @@
     flex-direction: column;
     opacity: 1;
     transition: opacity 0.75s;
-
-   /* &.CT {
+    /* &.CT {
         .player .hp_bar {
             background-color: var(--color-new-ct);
         }
@@ -133,6 +142,10 @@
                 }
             }
 
+            &.dead .player_data .top-row .username .roundkills-container {
+                right: 60px;
+            }
+
             .bot-row {
                 flex-direction: row;
 
@@ -157,7 +170,7 @@
                 flex-direction: row;
 
                 .username .roundkills-container {
-                    right: 115px;
+                    right: 95px;
                 }
             }
 
@@ -179,6 +192,10 @@
                     background: linear-gradient(90deg, rgba(183,243,18,0.5) 0%, rgba(0,0,0,0) 100%);
                     z-index: 99;
                 }
+            }
+
+            &.dead .player_data .top-row .username .roundkills-container {
+                left: 60px;
             }
 
             .dead-stats {
@@ -228,7 +245,7 @@
                         flex-direction: row-reverse;
 
                         .roundkills-container {
-                            left: 115px;
+                            left: 100px;
                         }
 
                         .weapon {
@@ -259,7 +276,7 @@
         }
 
         &.dead {
-            opacity: 0.8;
+            opacity: 0.9;
 
             .player_side_bar {
                 background-color: var(--main-panel-color) !important;
@@ -276,6 +293,8 @@
                 .dead-stats {
                     display: flex;
                     opacity: 1;
+                    transition: opacity 1s;
+                    transition-delay: 0.5s;
                 }
 
                 .top-row {
@@ -325,23 +344,25 @@
             position: absolute;
             height: 100%;
             width: 60px;
-            display: none;
+            display: flex;
             flex-direction: column;
             font-weight: 600;
             color: white;
-            opacity: 1;
+            opacity: 0;
             align-items: center;
+            justify-content: space-around;
 
             .labels, .values {
                 display: flex;
                 flex-direction: row;
-                flex: 1;
 
-                .stat-label, .stat-value {
-                    display: flex;
-                    flex: 1;
-                    align-items: center;
-                    justify-content: center;
+                .stat-value {
+                    font-size: 26px;
+                    font-weight: 700;
+                }
+
+                .stat-label {
+                    font-size: 15px;
                 }
             }
         }
@@ -393,6 +414,7 @@
                     .hp_background_2 {
                         background-color: var(--color-bomb);
                         transition: width 0.75s ease-in-out;
+                        transition-delay: 0.75s;
                     }
 
                     .username {
