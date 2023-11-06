@@ -208,7 +208,7 @@ export default class TeamBox extends React.Component<IProps, IState> {
                         <Bomb isPlanted={isPlanted} bomb={bomb} />
                     </div>
 
-                    <div id="timer" className={bo === 0 ? 'no-bo' : ''}>
+                    <div id="timer" className={bo === 1 ? 'no-bo' : ''}>
                         <div className={`round_timer_text ${isPlanted ? "planting" : ""}`}>
                             {isPlanted ? (
                                 <span>

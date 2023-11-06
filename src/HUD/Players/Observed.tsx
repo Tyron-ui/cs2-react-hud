@@ -21,12 +21,12 @@ class Statistic extends React.PureComponent<{ label: string; value: string | num
 }
 
 export default class Observed extends React.Component<{ player: Player | null, veto: Veto | null, round: number }, { showCam: boolean }> {
-	constructor(props: any){
+	constructor(props: any) {
 		super(props);
 		this.state = {
-		  showCam: true
+			showCam: true
 		}
-	  }
+	}
 	componentDidMount() {
 		actions.on('toggleCams', () => {
 			console.log(this.state.showCam)
@@ -41,7 +41,7 @@ export default class Observed extends React.Component<{ player: Player | null, v
 			killshs: 0,
 			damage: 0
 		}).filter(data => !!data).map(roundData => roundData.damage);
-		 
+
 		return damageInRounds.reduce((a, b) => a + b, 0) / (this.props.round - 1);
 	}
 	render() {
@@ -58,7 +58,7 @@ export default class Observed extends React.Component<{ player: Player | null, v
 		return (
 			<div className={`observed ${player.team.side}`}>
 				<div className="main_row">
-					{<Avatar teamId={player.team.id} steamid={player.steamid} height={225} width={130} showCam={this.state.showCam} slot={player.observer_slot} />}
+					{<Avatar teamId={player.team.id} steamid={player.steamid} height={250} width={250} showCam={this.state.showCam} slot={player.observer_slot} />}
 					<div className="username_container">
 						<div className="username">{player.name}</div>
 						{player.state.round_kills ? <div className="roundkills-container">{player.state.round_kills}</div> : null}
@@ -79,7 +79,7 @@ export default class Observed extends React.Component<{ player: Player | null, v
 						<Statistic label={"K"} value={stats.kills} />
 						<Statistic label={"A"} value={stats.assists} />
 						<Statistic label={"D"} value={stats.deaths} />
-						<Statistic label={"ADR"} value={player.state.adr} />
+						<Statistic label={"K/D"} value={ratio.toFixed(2)} />
 					</div>
 					<div className="ammo">
 						<div className="grenade_container">

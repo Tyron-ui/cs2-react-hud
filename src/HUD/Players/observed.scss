@@ -189,17 +189,21 @@
         }
 
         .avatar {
-            /*align-self: flex-end;*/
-            /*display: flex;*/
+            display: flex;
+            justify-content: center;
             position: absolute;
             width: 170px;
-            height: 200px;
-            left: -148px;
+            height: 170px;
+            left: -170px;
             bottom: 0px;
             overflow: hidden;
 
+
             img {
-                border-radius: 0;
+                max-width: 170px;
+                height: auto;
+                object-fit: scale-down;
+                margin-bottom: -20px;
             }
         }
     }

@@ -74,7 +74,7 @@
     opacity: 1;
     transition: opacity 0.75s;
 
-    &.CT {
+   /* &.CT {
         .player .hp_bar {
             background-color: var(--color-new-ct);
         }
@@ -84,7 +84,32 @@
         .player .hp_bar {
             background-color: var(--color-new-t);
         }
+    }*/
+
+    &.left.CT {
+        .player .hp_bar {
+            background: linear-gradient(90deg, rgba(1,87,155,1) 2%, rgba(19,149,215,1) 100%);
+        }
     }
+
+    &.right.CT {
+        .player .hp_bar {
+            background: linear-gradient(270deg, rgba(1,87,155,1) 2%, rgba(19,149,215,1) 100%);
+        }
+    }
+
+    &.left.T {
+        .player .hp_bar {
+            background: linear-gradient(270deg, rgba(255, 160, 0, 1) 2%, rgba(255, 111, 0, 1) 100%);
+        }
+    }
+
+    &.right.T {
+        .player .hp_bar {
+            background: linear-gradient(90deg, rgba(255, 160, 0, 1) 2%, rgba(255, 111, 0, 1) 100%);
+        }
+    }
+
 
     &.hide {
         opacity: 0;
@@ -204,6 +229,10 @@
 
                         .roundkills-container {
                             left: 115px;
+                        }
+
+                        .weapon {
+                            transform: scaleX(-1);
                         }
                     }
                 }
@@ -364,7 +393,6 @@
                     .hp_background_2 {
                         background-color: var(--color-bomb);
                         transition: width 0.75s ease-in-out;
-
                     }
 
                     .username {

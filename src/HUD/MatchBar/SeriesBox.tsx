@@ -16,7 +16,7 @@ export default class SeriesBox extends React.Component<Props> {
     const left = map.team_ct.orientation === "left" ? map.team_ct : map.team_t;
     const right = map.team_ct.orientation === "left" ? map.team_t : map.team_ct;
     return (
-      <div id="encapsulator">
+        <div id="encapsulator" className={bo === 1 ? 'no-bo' : ''}>
         <div className="container left">
           <div className={`series_wins left `}>
             <div className={`wins_box_container`}>
@@ -27,7 +27,7 @@ export default class SeriesBox extends React.Component<Props> {
           </div>
         </div>
         <div id="series_container">
-          <div id="series_text">{ bo ? `BEST OF ${bo}` : '' }</div>
+          <div id="series_text">{ bo ? `BEST OF ${bo}` : '' } </div>
         </div>
         <div className="container right">
           <div className={`series_wins right `}>

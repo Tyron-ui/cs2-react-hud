@@ -99,6 +99,7 @@ export default class MapSeries extends React.Component<IProps> {
 
     render() {
         const { match, teams, isFreezetime, map } = this.props;
+        const bo = (match && Number(match.matchType.substr(-1))) || 0;
         if (!match || !match.vetos.length) return null;
         return (
             <div className={`map_series_container ${isFreezetime && map.round % 10 === 0 ? 'show' : 'hide'}`}>
